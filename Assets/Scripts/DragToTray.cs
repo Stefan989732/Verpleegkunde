@@ -12,11 +12,9 @@ public class DragToTray : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDr
     private DragToTrayManager dragManager;
     private string objectTag;
 
-    // Parent object from which copies are allowed
     public Transform sourceParent;
-    public Transform trayParent; // Parent object representing the tray
+    public Transform trayParent;
 
-    // Original position to return to after dragging
     private Vector3 originalPosition;
     private Transform originalParent;
 
@@ -26,9 +24,8 @@ public class DragToTray : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDr
         canvasGroup = GetComponent<CanvasGroup>();
         canvas = GetComponentInParent<Canvas>();
         dragManager = FindObjectOfType<DragToTrayManager>();
-        objectTag = gameObject.tag; // Ensure each draggable object has a unique tag set in the Inspector
+        objectTag = gameObject.tag; 
 
-        // Save the original position and parent
         originalPosition = rectTransform.anchoredPosition;
         originalParent = transform.parent;
     }
@@ -39,7 +36,6 @@ public class DragToTray : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDr
         {
             this.enabled = false;
             
-            Debug.Log("Maximum number of copies reached.");
             return;
         }
 
@@ -71,44 +67,43 @@ public class DragToTray : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDr
     {
         canvasGroup.blocksRaycasts = true;
 
-        // Create the new instance and reset the original object's position
         if (dragManager.CanCreateNewInstance(objectTag))
         {
             CreateNewInstance();
 
-            // Reset the position and parent of the original object
             rectTransform.anchoredPosition = originalPosition;
             transform.SetParent(originalParent);
             canvasGroup.blocksRaycasts = true;
         }
     }
 
-    private void CreateNewInstance()
+private void CreateNewInstance()
+{
+    GameObject newObject = Instantiate(gameObject, rectTransform.position, Quaternion.identity);
+
+    RectTransform newRectTransform = newObject.GetComponent<RectTransform>();
+
+    newRectTransform.sizeDelta = rectTransform.sizeDelta;
+    newRectTransform.SetParent(trayParent, false);
+
+    DragToTray newDragToTray = newObject.GetComponent<DragToTray>();
+    newDragToTray.sourceParent = sourceParent;
+    newDragToTray.trayParent = trayParent;
+
+    newObject.transform.SetSiblingIndex(transform.GetSiblingIndex());
+
+    dragManager.IncrementInstanceCount(objectTag);
+
+    newRectTransform.anchoredPosition = trayParent.InverseTransformPoint(rectTransform.position);
+    newObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
+
+    newDragToTray.enabled = false;
+    TrayToGameObject trayToGameObject = newObject.GetComponent<TrayToGameObject>();
+    if (trayToGameObject == null)
     {
-        // Instantiate a new object
-        GameObject newObject = Instantiate(gameObject, rectTransform.position, Quaternion.identity);
-
-        // Get the RectTransform component of the new object
-        RectTransform newRectTransform = newObject.GetComponent<RectTransform>();
-
-        // Set the size and parent for proper rendering and interaction with UI
-        newRectTransform.sizeDelta = rectTransform.sizeDelta;
-        newRectTransform.SetParent(trayParent, false); // Set the parent to the tray
-
-        // Ensure the new object remains draggable
-        DragToTray newDragToTray = newObject.GetComponent<DragToTray>();
-        newDragToTray.sourceParent = sourceParent;
-        newDragToTray.trayParent = trayParent;
-
-        // Set sibling index to match the original object
-        newObject.transform.SetSiblingIndex(transform.GetSiblingIndex());
-
-        // Increment instance count in the manager
-        dragManager.IncrementInstanceCount(objectTag);
-
-        // Allow the new object to be dragged freely
-        newRectTransform.anchoredPosition = trayParent.InverseTransformPoint(rectTransform.position);
-        newObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        trayToGameObject = newObject.AddComponent<TrayToGameObject>();
     }
+    trayToGameObject.enabled = true;
+}
 
 }

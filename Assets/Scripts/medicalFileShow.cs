@@ -14,6 +14,7 @@ public class medicalFileShow : MonoBehaviour
 		btn.onClick.AddListener(ShowMedicalFile);
     }
 
+// Show the medical file when the button is clicked and hide the other objects
    void ShowMedicalFile(){
         MedicalFileShow.SetActive(!MedicalFileShow.activeSelf);
         MedicalTray.SetActive(!MedicalTray.activeSelf);

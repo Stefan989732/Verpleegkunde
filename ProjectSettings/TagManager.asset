@@ -11,6 +11,8 @@ TagManager:
   - Tourniquet
   - Desinfection
   - Unique
+  - Gloves
+  - tester
   layers:
   - Default
   - TransparentFX
