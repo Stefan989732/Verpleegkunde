@@ -1035,7 +1035,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   draggableObjects:
   - objectTag: BloodVial
-    maxCopies: 3
+    maxCopies: 2
     currentCopies: 0
   - objectTag: Gauze
     maxCopies: 1
@@ -1053,7 +1053,7 @@ MonoBehaviour:
     maxCopies: 1
     currentCopies: 0
   - objectTag: Gloves
-    maxCopies: 5
+    maxCopies: 3
     currentCopies: 0
 --- !u!4 &161243118
 Transform:
@@ -1500,6 +1500,10 @@ PrefabInstance:
     - target: {fileID: 9072384554915847088, guid: a9e9673060a3c1b4caaa3d8541b2e868, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9072384554915847088, guid: a9e9673060a3c1b4caaa3d8541b2e868, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9086020098519212643, guid: a9e9673060a3c1b4caaa3d8541b2e868, type: 3}
       propertyPath: m_Enabled
@@ -6657,7 +6661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropdownPanel: {fileID: 1628108055}
-  UIElement: {fileID: 2111803895}
+  MedicalSupplyPanel: {fileID: 2111803895}
   Tray: {fileID: 390138894}
   MedicalTrash: {fileID: 1507845151}
   Trash: {fileID: 900600962}

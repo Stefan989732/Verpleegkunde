@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class medicalSuppliesPanel : MonoBehaviour
 {
     public Button dropdownPanel;
-    public GameObject UIElement, Tray, MedicalTrash, Trash;
+    public GameObject MedicalSupplyPanel, Tray, MedicalTrash, Trash;
     private MedicalTrayHover medicalTrayHover;
 
     void Start()
@@ -19,10 +19,11 @@ public class medicalSuppliesPanel : MonoBehaviour
 
     void TaskOnClick()
     {
-        UIElement.SetActive(!UIElement.activeSelf);
+        MedicalSupplyPanel.SetActive(!MedicalSupplyPanel.activeSelf);
         MedicalTrash.SetActive(!MedicalTrash.activeSelf);
         Trash.SetActive(!Trash.activeSelf);
         medicalTrayHover.enabled = false;
+
 
         Tray.transform.position = new Vector3(Tray.transform.position.x, Tray.transform.position.y + 0.2f, Tray.transform.position.z);
 
@@ -32,10 +33,11 @@ public class medicalSuppliesPanel : MonoBehaviour
 
     IEnumerator ReEnableMedicalTrayHover()
     {
-        yield return new WaitForSeconds(0.5f); 
-        if (UIElement.activeSelf == false) 
+        yield return new WaitForSeconds(0); 
+        if (MedicalSupplyPanel.activeSelf == false) 
         {
             medicalTrayHover.enabled = true;
+            Tray.transform.position = new Vector3(Tray.transform.position.x, Tray.transform.position.y - 0.4f, Tray.transform.position.z);
         }
     }
 }

@@ -5,6 +5,7 @@ public class DragToTray : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDr
 {
     private Vector2 offset = new Vector2();
     private RectTransform rectTransform;
+
     private CanvasGroup canvasGroup;
     [HideInInspector] public Transform parentAfterDrag;
     private Canvas canvas;
@@ -45,7 +46,7 @@ public class DragToTray : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDr
             eventData.pressEventCamera,
             out Vector2 localMousePosition);
 
-        offset = rectTransform.anchoredPosition - localMousePosition;
+        offset = localMousePosition;
         canvasGroup.blocksRaycasts = false;
         parentAfterDrag = transform.parent;
         transform.SetParent(canvas.transform);
