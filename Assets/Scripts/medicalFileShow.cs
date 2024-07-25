@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class medicalFileShow : MonoBehaviour
 {
     public Button MedicalFile;
-    public GameObject MedicalFileShow, MedicalTray, MedicalTrash, Trash, Arm;
+    public GameObject MedicalFileShow, MedicalTray, MedicalTrash, Trash, Arm, Tutorial;
     void Start()
     {
 

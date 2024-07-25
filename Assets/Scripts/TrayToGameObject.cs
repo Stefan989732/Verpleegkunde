@@ -2,6 +2,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// Create a 3D version of the object when dragged from tray
+/// <<broken>>
+/// </summary>
 public class TrayToGameObject : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler
 {
     private RectTransform rectTransform;
@@ -51,20 +55,9 @@ public class TrayToGameObject : MonoBehaviour, IDragHandler, IEndDragHandler, IB
                 
                 if (tagData != null)
                 {
-                    string objectTag = gameObject.tag; 
-                    
-                if (objectTag == "Tourniquet")
-                    {
-                        tagData.gameObject.SetActive(true);
-                    }
-                else if (objectTag =="Vacutainer")
-                    {
-                        tagData.gameObject.SetActive(true);
-                    }
-                else if (objectTag =="BloodVial")
-                    {
-                        tagData.gameObject.SetActive(true);
-                    }
+                    // activate gameobject with the same tag and destroy the current object
+                    tagData.gameObject.SetActive(true);
+                    Destroy(GameObject.Find(gameObject.tag + "(Clone)"));
                 }
             }
         }

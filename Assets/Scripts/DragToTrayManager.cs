@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// based on a tagging system, manage how many copies can be created
+/// </summary>
 public class DragToTrayManager : MonoBehaviour
 {
 [System.Serializable]
@@ -24,6 +27,11 @@ public class DragToTrayManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// checks if the user can create a new instance 
+    /// </summary>
+    /// <param name="objectTag"></param>
+    /// <returns></returns>
     public bool CanCreateNewInstance(string objectTag)
     {
         if (objectInfoDict.ContainsKey(objectTag))
@@ -33,6 +41,10 @@ public class DragToTrayManager : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// Increase the object instance count
+    /// </summary>
+    /// <param name="objectTag"></param>
     public void IncrementInstanceCount(string objectTag)
     {
         if (objectInfoDict.ContainsKey(objectTag))
@@ -41,6 +53,10 @@ public class DragToTrayManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Decrease the object instance count
+    /// </summary>
+    /// <param name="objectTag"></param>
     public void DecrementInstanceCount(string objectTag)
     {
         if (objectInfoDict.ContainsKey(objectTag))
@@ -49,6 +65,11 @@ public class DragToTrayManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Get the amount of copies if available, else 0
+    /// </summary>
+    /// <param name="objectTag"></param>
+    /// <returns></returns>
     public int GetCopyCount(string objectTag)
     {
         if (objectInfoDict.ContainsKey(objectTag))

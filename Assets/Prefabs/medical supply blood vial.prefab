@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3701214233471170994}
   - component: {fileID: 4061412402955476989}
   - component: {fileID: 3843805152208169434}
-  - component: {fileID: 5442230350798660705}
   m_Layer: 5
   m_Name: medical supply blood vial
   m_TagString: Untagged
@@ -147,18 +146,6 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
---- !u!114 &5442230350798660705
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3610656571913746903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30786eb0a81773647957f09796652db8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8929046799873284470
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,4 +231,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bbb2a47edbd08f4f8bd285f386ce04d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentAfterDrag: {fileID: 0}
+  sourceParentObject: {fileID: 0}
+  destinationParentObject: {fileID: 0}
